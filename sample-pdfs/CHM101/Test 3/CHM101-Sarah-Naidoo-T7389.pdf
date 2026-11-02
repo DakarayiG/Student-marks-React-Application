@@ -1,0 +1,60 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1059 >>
+stream
+0.93 g 0 762 595 80 re f 0 g
+BT /F2 22 Tf 50 805 Td (Chemistry) Tj ET
+BT /F2 11 Tf 50 720 Td (Module code:) Tj ET
+BT /F1 11 Tf 170 720 Td (CHM101) Tj ET
+BT /F2 11 Tf 50 700 Td (Student Number:) Tj ET
+BT /F1 11 Tf 170 700 Td (T7389) Tj ET
+BT /F2 11 Tf 50 680 Td (First Name:) Tj ET
+BT /F1 11 Tf 170 680 Td (Sarah) Tj ET
+BT /F2 11 Tf 50 660 Td (Last Name:) Tj ET
+BT /F1 11 Tf 170 660 Td (Naidoo) Tj ET
+BT /F2 11 Tf 50 640 Td (Semester:) Tj ET
+BT /F1 11 Tf 170 640 Td (1) Tj ET
+BT /F2 11 Tf 50 620 Td (Year:) Tj ET
+BT /F1 11 Tf 170 620 Td (2026) Tj ET
+BT /F2 13 Tf 50 585 Td (Marks) Tj ET
+0.75 G 0.8 w 50 575 m 545 575 l S
+BT /F1 11 Tf 50 553 Td (Question 1:   4 / 5) Tj ET
+BT /F1 11 Tf 50 531 Td (Question 2:   8 / 10) Tj ET
+BT /F1 11 Tf 50 509 Td (Question 3:   8 / 10) Tj ET
+BT /F1 11 Tf 50 487 Td (Question 4:   6 / 10) Tj ET
+BT /F1 11 Tf 50 465 Td (Question 5:   5 / 5) Tj ET
+0.75 G 0.8 w 50 453 m 545 453 l S
+BT /F2 13 Tf 50 433 Td (Total Mark: 31 / 40) Tj ET
+BT /F1 10 Tf 50 383 Td (Marked by: Course Lecturer) Tj ET
+BT /F1 13 Tf 50 780 Td (Test 3) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000001361 00000 n 
+0000001458 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1560
+%%EOF

@@ -1,46 +1,149 @@
-# Getting Started with Create React App
+# MarkTrack — Student Marks Analytics
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MarkTrack turns marked test and exam PDFs into class and student dashboards. Drop in a batch of marked PDFs and it reads each student's details and per-question marks, saves them to MySQL, and shows how the class and each student are doing — per test, per question, across subjects, and across the year.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Upload PDFs** — drag and drop a batch of marked PDFs. Each one is read in the browser (student, module, year, test, per-question marks, total) and saved to the database.
+- **Class Analytics** — for one module and test:
+  - class average, median, pass rate, top and lowest score
+  - hardest and easiest question
+  - grade breakdown (A–F) and per-question performance
+  - class progress across tests, and comparison with the same module in another year
+  - ranked student table with per-question marks
+  - Excel export of a single test or the whole module
+- **Student Progress** — one student across every subject that year: average per subject vs the class, progress per subject, and a full results list. Pick a subject for the detailed view (trend vs class, per-question scores, test history).
+- **Tests & Exam** — Test 1 → Test 2 → Test 3 → Exam on one timeline, for the whole class or a single student, with an Improving / Steady / Declining trend for each student.
+- **Data checks** — warns when a PDF was read with missing question marks, and lets you delete a single student's mark record.
 
-### `npm start`
+## Tech stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Part | Built with |
+|---|---|
+| Frontend | React 19, TypeScript, Redux Toolkit, Recharts, pdf.js, SheetJS (xlsx), Create React App |
+| Backend | Node.js, Express, mysql2 |
+| Database | MySQL |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+### Requirements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org/) 18 or newer
+- [MySQL](https://dev.mysql.com/downloads/) 8 (or MariaDB), running locally
 
-### `npm run build`
+### 1. Install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone <this-repo-url>
+cd student-marks
+npm install
+npm run server:install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Configure the database login
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Copy the example settings file and fill in your MySQL username and password:
 
-### `npm run eject`
+```bash
+cp server/.env.example server/.env
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The server creates the `marktrack_db` database and its tables automatically the first time it starts.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. Run
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Use two terminals:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+# Terminal 1 — API server on http://localhost:5001
+npm run server
 
-## Learn More
+# Terminal 2 — website on http://localhost:3000
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Both must be running. If the website shows *"Could not reach the database"*, the API server isn't running or can't log in to MySQL.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Try it with the sample PDFs
+
+[`sample-pdfs/`](sample-pdfs/) has 131 made-up marked PDFs for 8 students:
+
+| Folder | Modules | Assessments |
+|---|---|---|
+| `sample-pdfs/` | ALG101 Algorithms, CHM101 Chemistry, BIO102 Biology | Tests 1–3, plus an ALG101 exam |
+| `sample-pdfs/Semester 2/` | ALG102 Data Structures, CHM102 Organic Chemistry | Tests 1–3 and an exam each |
+
+Open **Upload PDFs** and drag in one folder at a time (for example `sample-pdfs/ALG101/Test 1`), then click **Process**.
+
+## PDF format
+
+Name each file `ModuleCode-FirstName-LastName-StudentNumber.pdf`, e.g. `ALG101-Timothy-Davis-T7462.pdf`.
+
+The first page should contain text like this (layout doesn't matter, the labels do):
+
+```
+Algorithms                      ← module name first
+Test 2                          ← or "Final Exam"
+Module code: ALG101
+Student Number: T7462
+First Name: Timothy
+Last Name: Davis
+Semester: 1
+Year: 2026
+Question 1:  4 / 5
+Question 2:  6 / 10
+...
+Total Mark: 25 / 40
+```
+
+If a field is missing from the text, the student details fall back to the file name. Each semester should use its own module codes (e.g. ALG101 in semester 1, ALG102 in semester 2) — the dashboards filter by module and year.
+
+## Project structure
+
+```
+student-marks/
+├── public/                  Static files for the website
+├── src/
+│   ├── App.tsx              Sidebar, page switching
+│   ├── App.css              All styles
+│   ├── components/
+│   │   ├── Upload/          PDF upload page
+│   │   └── Dashboard/       Class Analytics, Student Progress, Tests & Exam,
+│   │                        and shared chart/filter helpers (shared.tsx)
+│   ├── store/               Redux store (talks to the API)
+│   ├── utils/
+│   │   ├── pdfProcessor.ts  Reads marks out of a PDF
+│   │   ├── stats.ts         Averages, pass rate, per-question stats, grades
+│   │   ├── excelExport.ts   Excel downloads
+│   │   └── api.ts           Calls to the API server
+│   └── types/               Shared TypeScript types
+├── server/
+│   ├── index.js             Express API
+│   ├── db.js                MySQL connection and table setup
+│   └── .env.example         Database settings template
+└── sample-pdfs/             Example marked PDFs
+```
+
+## API
+
+All routes are served by the Express server on port 5001 (the website proxies `/api` to it).
+
+| Method | Route | Does |
+|---|---|---|
+| `GET` | `/api/health` | Health check |
+| `GET` | `/api/tests` | Every test with its students and question marks |
+| `POST` | `/api/tests/upsert-student` | Add or update one student's marks for a test |
+| `DELETE` | `/api/tests/:testId/students/:studentId` | Delete one student's mark record |
+| `DELETE` | `/api/tests` | Delete all data |
+
+## Grading
+
+| Grade | Percentage |
+|---|---|
+| A | 75–100% |
+| B | 60–74% |
+| C | 50–59% |
+| D | 40–49% |
+| F | below 40% |
+
+A pass is 50% or more.
