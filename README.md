@@ -150,9 +150,9 @@ A pass is 50% or more.
 
 ## How this was built
 
-I designed and built MarkTrack: I defined the requirements, built the PDF upload and marks-reading flow, the Express/MySQL API and the dashboards, designed how each dashboard should look and behave, and tested everything with real and sample marked PDFs.
+I built the original version of MarkTrack myself: the PDF upload and marks-reading flow, the Express/MySQL API and the dashboards.
 
-I used [Claude Code](https://claude.com/claude-code) as an AI coding assistant along the way, mainly to:
+I then used [Claude Code](https://claude.com/claude-code) as an AI coding assistant to help me perfect it and fix bugs, mainly to:
 
 - diagnose and fix a chart rendering bug (Recharts 2.1 is incompatible with React 19)
 - rework the Class Analytics and Student Progress layouts to my specifications
