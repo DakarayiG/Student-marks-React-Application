@@ -16,6 +16,22 @@ MarkTrack turns marked test and exam PDFs into class and student dashboards. Dro
 - **Tests & Exam** — Test 1 → Test 2 → Test 3 → Exam on one timeline, for the whole class or a single student, with an Improving / Steady / Declining trend for each student.
 - **Data checks** — warns when a PDF was read with missing question marks, and lets you delete a single student's mark record.
 
+
+
+## How this was built
+
+I built the original version of MarkTrack myself: the PDF upload and marks-reading flow, the Express/MySQL API and the dashboards.
+
+I then used [Claude Code](https://claude.com/claude-code) as an AI coding assistant to help me perfect it and fix bugs, mainly to:
+
+- diagnose and fix a chart rendering bug (Recharts 2.1 is incompatible with React 19)
+- rework the Class Analytics and Student Progress layouts to my specifications
+- add the Tests & Exam page, the per-record delete option, and the Easiest Question card
+- refactor and remove duplicated code
+- generate the sample PDFs and draft this README
+
+All changes were reviewed, tested and directed by me.
+
 ## Tech stack
 
 | Part | Built with |
@@ -148,16 +164,4 @@ All routes are served by the Express server on port 5001 (the website proxies `/
 
 A pass is 50% or more.
 
-## How this was built
 
-I built the original version of MarkTrack myself: the PDF upload and marks-reading flow, the Express/MySQL API and the dashboards.
-
-I then used [Claude Code](https://claude.com/claude-code) as an AI coding assistant to help me perfect it and fix bugs, mainly to:
-
-- diagnose and fix a chart rendering bug (Recharts 2.1 is incompatible with React 19)
-- rework the Class Analytics and Student Progress layouts to my specifications
-- add the Tests & Exam page, the per-record delete option, and the Easiest Question card
-- refactor and remove duplicated code
-- generate the sample PDFs and draft this README
-
-All changes were reviewed, tested and directed by me.
