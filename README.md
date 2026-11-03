@@ -147,3 +147,17 @@ All routes are served by the Express server on port 5001 (the website proxies `/
 | F | below 40% |
 
 A pass is 50% or more.
+
+## How this was built
+
+I designed and built MarkTrack: I defined the requirements, built the PDF upload and marks-reading flow, the Express/MySQL API and the dashboards, designed how each dashboard should look and behave, and tested everything with real and sample marked PDFs.
+
+I used [Claude Code](https://claude.com/claude-code) as an AI coding assistant along the way, mainly to:
+
+- diagnose and fix a chart rendering bug (Recharts 2.1 is incompatible with React 19)
+- rework the Class Analytics and Student Progress layouts to my specifications
+- add the Tests & Exam page, the per-record delete option, and the Easiest Question card
+- refactor and remove duplicated code
+- generate the sample PDFs and draft this README
+
+All changes were reviewed, tested and directed by me.
